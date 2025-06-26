@@ -1,0 +1,319 @@
+[vite] connecting...
+client:912 [vite] connected.
+react-dom_client.js?v=10f0c280:17987 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+authProvider.js:28 [AuthProvider] Login Response Received: Object
+authProvider.js:32 [AuthProvider] Storing user_info: Object
+authProvider.js:105 [AuthProvider getIdentity] Raw user_info from localStorage: {"first_name":"Demo","id":"6815d75750d9f4b8eb259d20","last_name":"Doctor"}
+authProvider.js:109 [AuthProvider getIdentity] Parsed user_info: Object
+authProvider.js:105 [AuthProvider getIdentity] Raw user_info from localStorage: {"first_name":"Demo","id":"6815d75750d9f4b8eb259d20","last_name":"Doctor"}
+authProvider.js:109 [AuthProvider getIdentity] Parsed user_info: Object
+AIChatInterface.jsx:43 Sending to /api/ai/query: {query: 'geia'}
+dataProvider.js:19 Fetching: http://localhost:5000/api/ai/query {method: 'POST', body: '{"query":"geia"}', headers: Headers}
+AIChatInterface.jsx:48 Received from /api/ai/query: {data: {…}}
+dataProvider.js:19 Fetching: http://localhost:5000/api/patients?filter=%7B%7D&range=%5B0%2C9%5D&sort=%5B%22id%22%2C%22ASC%22%5D {headers: Headers, signal: undefined}
+dataProvider.js:19 Fetching: http://localhost:5000/api/doctors?filter=%7B%22id%22%3A%5B%226814d2c4f937fc8be8ca4756%22%2C%226815d75750d9f4b8eb259d20%22%5D%7D {signal: undefined, headers: Headers}
+dataProvider.js:19 Fetching: http://localhost:5000/api/patients/6815d827b9d54922ce0fef44 {headers: Headers}
+PatientEdit.jsx:32 [PatientEditToolbar] Checking permissions for patient 6815d827b9d54922ce0fef44: Can Edit = true
+PatientEdit.jsx:32 [PatientEditToolbar] Checking permissions for patient 6815d827b9d54922ce0fef44: Can Edit = true
+PatientEdit.jsx:32 [PatientEditToolbar] Checking permissions for patient 6815d827b9d54922ce0fef44: Can Edit = true
+PatientEdit.jsx:32 [PatientEditToolbar] Checking permissions for patient 6815d827b9d54922ce0fef44: Can Edit = true
+PatientEdit.jsx:36 TypeError: Cannot read properties of null (reading 'control')
+    at useFormState (chunk-3ISJLIRA.js?v=10f0c280:160:29)
+    at SaveButton (react-admin.js?v=10f0c280:8301:12)
+    at react-stack-bottom-frame (react-dom_client.js?v=10f0c280:17424:20)
+    at renderWithHooks (react-dom_client.js?v=10f0c280:4206:24)
+    at updateFunctionComponent (react-dom_client.js?v=10f0c280:6619:21)
+    at beginWork (react-dom_client.js?v=10f0c280:7654:20)
+    at runWithFiberInDEV (react-dom_client.js?v=10f0c280:1485:72)
+    at performUnitOfWork (react-dom_client.js?v=10f0c280:10868:98)
+    at workLoopSync (react-dom_client.js?v=10f0c280:10728:43)
+    at renderRootSync (react-dom_client.js?v=10f0c280:10711:13)
+
+The above error occurred in the <SaveButton> component.
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+
+defaultOnCaughtError @ react-dom_client.js?v=10f0c280:6264
+logCaughtError @ react-dom_client.js?v=10f0c280:6296
+runWithFiberInDEV @ react-dom_client.js?v=10f0c280:1485
+inst.componentDidCatch.update.callback @ react-dom_client.js?v=10f0c280:6341
+callCallback @ react-dom_client.js?v=10f0c280:4097
+commitCallbacks @ react-dom_client.js?v=10f0c280:4109
+runWithFiberInDEV @ react-dom_client.js?v=10f0c280:1485
+commitClassCallbacks @ react-dom_client.js?v=10f0c280:8543
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9011
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9045
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9045
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9045
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9045
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8960
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:8956
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9096
+recursivelyTraverseLayoutEffects @ react-dom_client.js?v=10f0c280:9682
+commitLayoutEffectOnFiber @ react-dom_client.js?v=10f0c280:9016
+flushLayoutEffects @ react-dom_client.js?v=10f0c280:11174
+commitRoot @ react-dom_client.js?v=10f0c280:11080
+commitRootWhenReady @ react-dom_client.js?v=10f0c280:10512
+performWorkOnRoot @ react-dom_client.js?v=10f0c280:10457
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=10f0c280:11623
+performWorkUntilDeadline @ react-dom_client.js?v=10f0c280:36
+<SaveButton>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=10f0c280:250
+PatientEditToolbar @ PatientEdit.jsx:36
+react-stack-bottom-frame @ react-dom_client.js?v=10f0c280:17424
+renderWithHooksAgain @ react-dom_client.js?v=10f0c280:4281
+renderWithHooks @ react-dom_client.js?v=10f0c280:4217
+updateFunctionComponent @ react-dom_client.js?v=10f0c280:6619
+beginWork @ react-dom_client.js?v=10f0c280:7654
+runWithFiberInDEV @ react-dom_client.js?v=10f0c280:1485
+performUnitOfWork @ react-dom_client.js?v=10f0c280:10868
+workLoopSync @ react-dom_client.js?v=10f0c280:10728
+renderRootSync @ react-dom_client.js?v=10f0c280:10711
+performWorkOnRoot @ react-dom_client.js?v=10f0c280:10359
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=10f0c280:11623
+performWorkUntilDeadline @ react-dom_client.js?v=10f0c280:36
+<PatientEditToolbar>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=10f0c280:250
+PatientEdit @ PatientEdit.jsx:43
+react-stack-bottom-frame @ react-dom_client.js?v=10f0c280:17424
+renderWithHooksAgain @ react-dom_client.js?v=10f0c280:4281
+renderWithHooks @ react-dom_client.js?v=10f0c280:4217
+updateFunctionComponent @ react-dom_client.js?v=10f0c280:6619
+beginWork @ react-dom_client.js?v=10f0c280:7654
+runWithFiberInDEV @ react-dom_client.js?v=10f0c280:1485
+performUnitOfWork @ react-dom_client.js?v=10f0c280:10868
+workLoopSync @ react-dom_client.js?v=10f0c280:10728
+renderRootSync @ react-dom_client.js?v=10f0c280:10711
+performWorkOnRoot @ react-dom_client.js?v=10f0c280:10359
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=10f0c280:11623
+performWorkUntilDeadline @ react-dom_client.js?v=10f0c280:36Understand this error  annot read properties of null (reading 'control')
+
+
+    at SaveButton (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:8293:15)
+    at div (<anonymous>)
+    at MuiToolbar-root (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:3267:45)
+    at Toolbar2 (http://localhost:5173/node_modules/.vite/deps/chunk-KBV3K4VU.js?v=10f0c280:40498:17)
+    at RaToolbar-root (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:3267:45)
+    at Toolbar (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:20971:15)
+    at PatientEditToolbar (http://localhost:5173/src/PatientEdit.jsx:40:52)
+    at div (<anonymous>)
+    at RaEdit-root (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:3267:45)
+    at EditView (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:20854:15)
+    at RecordContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:9193:23)
+    at SaveContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:14452:23)
+    at EditContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:15220:23)
+    at OptionalResourceContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:22363:20)
+    at EditBase (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:15245:23)
+    at Edit (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:20922:3)
+    at PatientEdit (<anonymous>)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6098:26)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6834:3)
+    at ResourceContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:22357:23)
+    at Resource (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:22372:22)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6098:26)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6834:3)
+    at Suspense (<anonymous>)
+    at ErrorBoundary (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:21774:5)
+    at div (<anonymous>)
+    at main (<anonymous>)
+    at div (<anonymous>)
+    at div (<anonymous>)
+    at RaLayout-root (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:3267:45)
+    at Layout (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:6461:15)
+    at MyLayout (<anonymous>)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6098:26)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6834:3)
+    at CoreAdminRoutes (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:22198:3)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6098:26)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6834:3)
+    at ErrorBoundary (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:21774:5)
+    at CoreAdminUI (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:22293:43)
+    at CssBaseline (http://localhost:5173/node_modules/.vite/deps/chunk-KBV3K4VU.js?v=10f0c280:16793:17)
+    at AdminUI (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:24519:18)
+    at DefaultPropsProvider (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:6692:3)
+    at RtlProvider (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:6668:3)
+    at ThemeProvider2 (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:6624:5)
+    at ThemeProvider3 (http://localhost:5173/node_modules/.vite/deps/chunk-HSAN27KW.js?v=10f0c280:6775:5)
+    at ThemeProviderNoVars (http://localhost:5173/node_modules/.vite/deps/chunk-KBV3K4VU.js?v=10f0c280:626:10)
+    at ThemeProvider (http://localhost:5173/node_modules/.vite/deps/chunk-KBV3K4VU.js?v=10f0c280:708:3)
+    at ThemeProvider2 (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:3429:23)
+    at ResourceDefinitionContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:21278:17)
+    at UndoableMutationsContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:12246:23)
+    at NotificationContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:5933:23)
+    at I18nContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:23095:17)
+    at DummyRouter (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:9032:23)
+    at BasenameContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:9016:23)
+    at AdminRouter (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:9022:17)
+    at QueryClientProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:8771:3)
+    at PreferencesEditorContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:21658:23)
+    at StoreContextProvider (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:5837:20)
+    at CoreAdminContext (http://localhost:5173/node_modules/.vite/deps/chunk-MH7VUN54.js?v=10f0c280:21709:28)
+    at AdminContext (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:24553:21)
+    at Admin (http://localhost:5173/node_modules/.vite/deps/react-admin.js?v=10f0c280:24845:28)
+    at Router (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:6777:13)
+    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/chunk-2JLNHBIE.js?v=10f0c280:9053:3)
+    at App (<anonymous>)
+
+Need help with this error? Try the following:
+
+Check the react-admin documentation
+Search on StackOverflow for community answers
+Get help from the core team via react-admin Enterprise Edition(venv) PS C:\Users\Panos\OneDrive\Υπολογιστής\pagni\diabetes_backend> python app.py
+MongoDB connection successful.
+Starting Flask-SocketIO server (Reloader Enabled)...
+Starting Flask-SocketIO server (Reloader Enabled)...
+ * Restarting with stat
+MongoDB connection successful.
+Starting Flask-SocketIO server (Reloader Enabled)...
+Starting Flask-SocketIO server (Reloader Enabled)...
+ * Debugger is active!
+ * Debugger PIN: 145-588-706
+(21832) wsgi starting up on http://0.0.0.0:5000
+(21832) accepted ('127.0.0.1', 52914)
+127.0.0.1 - - [03/May/2025 18:50:11] "OPTIONS /api/auth/login HTTP/1.1" 200 427 0.002092
+127.0.0.1 - - [03/May/2025 18:50:12] "POST /api/auth/login HTTP/1.1" 200 780 0.284583
+(21832) accepted ('127.0.0.1', 52915)
+(21832) accepted ('127.0.0.1', 52947)
+127.0.0.1 - - [03/May/2025 18:50:42] "OPTIONS /api/ai/query HTTP/1.1" 200 442 0.002002
+Sending request to DeepSeek API...
+Received response from DeepSeek API.
+127.0.0.1 - - [03/May/2025 18:50:48] "POST /api/ai/query HTTP/1.1" 200 697 6.135797
+(21832) accepted ('127.0.0.1', 52949)
+127.0.0.1 - - [03/May/2025 18:50:55] "OPTIONS /api/patients?filter=%7B%7D&range=%5B0%2C9%5D&sort=%5B%22id%22%2C%22ASC%22%5D HTTP/1.1" 200 439 0.001517
+127.0.0.1 - - [03/May/2025 18:50:55] "GET /api/patients?filter=%7B%7D&range=%5B0%2C9%5D&sort=%5B%22id%22%2C%22ASC%22%5D HTTP/1.1" 200 39345 0.100312
+127.0.0.1 - - [03/May/2025 18:50:56] "OPTIONS /api/doctors?filter=%7B%22id%22%3A%5B%226814d2c4f937fc8be8ca4756%22%2C%226815d75750d9f4b8eb259d20%22%5D%7D HTTP/1.1" 200 439 0.001004
+127.0.0.1 - - [03/May/2025 18:50:56] "GET /api/doctors?filter=%7B%22id%22%3A%5B%226814d2c4f937fc8be8ca4756%22%2C%226815d75750d9f4b8eb259d20%22%5D%7D HTTP/1.1" 200 1342 0.017941
+127.0.0.1 - - [03/May/2025 18:50:58] "OPTIONS /api/patients/6815d827b9d54922ce0fef44 HTTP/1.1" 200 448 0.001108
+[AUTH CHECK] Requesting User ID: 6815d75750d9f4b8eb259d20
+[AUTH CHECK] Patient ID: 6815d827b9d54922ce0fef44
+[AUTH CHECK] Is Requesting Patient: False
+[AUTH CHECK] Current Doctor ObjectId: 6815d75750d9f4b8eb259d20
+[AUTH CHECK] Patient Assigned Doctors: [ObjectId('6815d75750d9f4b8eb259d20')]
+[AUTH CHECK] Is Common Space: True
+[AUTH CHECK] Is Assigned Doctor: True
+[AUTH CHECK] Doctor IS authorized (assigned or common space).
+[AUTH CHECK] FINAL DECISION: Authorized (200)
+127.0.0.1 - - [03/May/2025 18:50:58] "GET /api/patients/6815d827b9d54922ce0fef44 HTTP/1.1" 200 1068 0.007025

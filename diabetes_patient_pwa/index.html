@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Polyfill for Node.js 'global' variable used by some dependencies
+      if (typeof global === 'undefined') {
+          window.global = window;
+      }
+      // Optional: Polyfill for 'process' if needed by other libraries
+      if (typeof process === 'undefined') {
+           window.process = { env: { DEBUG: undefined }, /* Add other needed properties */ };
+      }
+      // Optional: Polyfill for Buffer if needed
+      // You might need to install the 'buffer' package: npm install buffer
+      // import { Buffer } from 'buffer';
+      // window.Buffer = Buffer; 
+  </script>
+  <script type="module" src="/src/main.jsx"></script> 
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

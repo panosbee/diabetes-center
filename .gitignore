@@ -1,0 +1,77 @@
+# .gitignore for Digital Diabetes Center (monorepo: backend, frontend, PWA)
+
+# --- Global ---
+# OS/Editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+*.log
+logs/
+
+# VSCode/IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# --- Python Backend ---
+# Virtualenv
+venv/
+ENV/
+.env
+.env.*
+*.egg-info/
+.eggs/
+build/
+dist/
+# Coverage
+.coverage
+htmlcov/
+.tox/
+.cache/
+pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Node/React Frontends ---
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+*.local
+
+# --- PWA ---
+diabetes_patient_pwa/node_modules/
+diabetes_patient_pwa/dist/
+diabetes_patient_pwa/build/
+
+# --- Frontend ---
+diabetes_frontend/node_modules/
+diabetes_frontend/dist/
+diabetes_frontend/build/
+
+# --- Uploads/Generated ---
+diabetes_backend/uploads/
+
+# --- Test/Reports ---
+coverage/
+*.coverage
+*.lcov
+
+# --- Misc ---
+*.orig
+*.rej
+*.patch
+
+# --- Personal/Discussion TXT files ---
+pharmakgbapi.txt
+psgapi.txt
+
+# --- DO NOT ignore __pycache__ if you want it in repo ---
+# (Αν ΔΕΝ θέλεις τα __pycache__ στο repo, πρόσθεσε: __pycache__/)
