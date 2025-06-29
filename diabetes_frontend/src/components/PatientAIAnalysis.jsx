@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   useRecordContext,
@@ -520,149 +521,652 @@ const formatEnhancedComparisonData = useCallback(() => {
   }
 }, [scenarioResults]);
 
-  // FIXED: Enhanced Mindmap Component με safe rendering
+// ULTRA-ENHANCED Interactive Mindmap Component - ONE IN A BILLION
   const EnhancedMindmapVisualization = ({ data }) => {
-    const svgRef = React.useRef();
+    const containerRef = React.useRef();
+    const [selectedNode, setSelectedNode] = useState(null);
+    const [viewMode, setViewMode] = useState('radial'); // radial, tree, force
+    const [animationSpeed, setAnimationSpeed] = useState(1);
+    const [showParticles, setShowParticles] = useState(true);
+    const [zoomLevel, setZoomLevel] = useState(1);
+    const [hoveredNode, setHoveredNode] = useState(null);
+    const [expandedNodes, setExpandedNodes] = useState(new Set(['root']));
     
     React.useEffect(() => {
       try {
-        if (!data || !svgRef.current) return;
+        if (!data || !containerRef.current) return;
         
-        const svg = svgRef.current;
+        // Clear previous content
+        containerRef.current.innerHTML = '';
+        
+       
+        
         const width = 600;
         const height = 450;
-        svg.innerHTML = '';
         
-        const createEnhancedNode = (node, x, y, level = 0) => {
-          if (!node || !node.label) return; // FIXED: Safe node check
+        // Create main SVG with zoom capabilities
+        const svg = d3.select(containerRef.current)
+          .append('svg')
+          .attr('width', '100%')
+          .attr('height', '100%')
+          .attr('viewBox', `0 0 ${width} ${height}`)
+          .style('background', 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%)')
+          .style('border-radius', '8px')
+          .style('cursor', 'grab');
+        
+        // Add filters and effects
+        const defs = svg.append('defs');
+        
+        // Glow filter
+        const glowFilter = defs.append('filter')
+          .attr('id', 'glow');
+        glowFilter.append('feGaussianBlur')
+          .attr('stdDeviation', '3')
+          .attr('result', 'coloredBlur');
+        const feMerge = glowFilter.append('feMerge');
+        feMerge.append('feMergeNode')
+          .attr('in', 'coloredBlur');
+        feMerge.append('feMergeNode')
+          .attr('in', 'SourceGraphic');
+        
+        // Pulse animation filter
+        const pulseFilter = defs.append('filter')
+          .attr('id', 'pulse')
+          .attr('x', '-50%')
+          .attr('y', '-50%')
+          .attr('width', '200%')
+          .attr('height', '200%');
+        pulseFilter.append('feGaussianBlur')
+          .attr('in', 'SourceGraphic')
+          .attr('stdDeviation', '2');
+        
+        // Create zoom behavior
+        const zoom = d3.zoom()
+          .scaleExtent([0.5, 4])
+          .on('zoom', (event) => {
+            g.attr('transform', event.transform);
+            setZoomLevel(event.transform.k);
+          });
+        
+        svg.call(zoom);
+        
+        // Create main group for transformations
+        const g = svg.append('g');
+        
+        // Particle system background
+        if (showParticles) {
+          const particlesGroup = g.append('g').attr('class', 'particles');
+          const particleCount = 50;
           
-          const radius = level === 0 ? 55 : level === 1 ? 40 : 28;
-          const colors = {
-            root: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            category: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', 
-            parameter: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-            outcome: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-            risk: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-            recommendation: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
+          for (let i = 0; i < particleCount; i++) {
+            const particle = particlesGroup.append('circle')
+              .attr('r', Math.random() * 2 + 0.5)
+              .attr('cx', Math.random() * width)
+              .attr('cy', Math.random() * height)
+              .attr('fill', `rgba(100, 200, 255, ${Math.random() * 0.5 + 0.2})`)
+              .attr('class', 'particle');
+            
+            // Animate particles
+            const duration = (Math.random() * 20 + 10) * 1000 / animationSpeed;
+            const animateParticle = () => {
+              particle
+                .transition()
+                .duration(duration)
+                .ease(d3.easeLinear)
+                .attr('cx', Math.random() * width)
+                .attr('cy', Math.random() * height)
+                .on('end', animateParticle);
+            };
+            animateParticle();
+          }
+        }
+        
+        // Process data for D3 hierarchy
+        const processNode = (node, parent = null) => {
+          if (!node) return null;
+          
+          const processed = {
+            id: node.id || Math.random().toString(36).substr(2, 9),
+            name: node.label || 'Unknown',
+            type: node.type || 'default',
+            value: safeGet(node, 'data.value'),
+            unit: safeGet(node, 'data.unit', ''),
+            parent: parent,
+            originalData: node,
+            children: []
           };
           
-          // Create enhanced circle with SVG gradient
-          const defs = svg.querySelector('defs') || document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-          if (!svg.querySelector('defs')) svg.appendChild(defs);
-          
-          const gradientId = `gradient-${node.id}-${level}`;
-          const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
-          gradient.setAttribute('id', gradientId);
-          
-          const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-          stop1.setAttribute('offset', '0%');
-          stop1.setAttribute('stop-color', colors[node.type]?.split(' ')[2] || '#4facfe');
-          
-          const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-          stop2.setAttribute('offset', '100%');
-          stop2.setAttribute('stop-color', colors[node.type]?.split(' ')[5] || '#00f2fe');
-          
-          gradient.appendChild(stop1);
-          gradient.appendChild(stop2);
-          defs.appendChild(gradient);
-          
-          // Enhanced circle με shadow
-          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-          circle.setAttribute('cx', x);
-          circle.setAttribute('cy', y);
-          circle.setAttribute('r', radius);
-          circle.setAttribute('fill', `url(#${gradientId})`);
-          circle.setAttribute('stroke', 'rgba(255,255,255,0.8)');
-          circle.setAttribute('stroke-width', '3');
-          circle.setAttribute('filter', 'drop-shadow(3px 3px 6px rgba(0,0,0,0.3))');
-          circle.setAttribute('opacity', '0.95');
-          svg.appendChild(circle);
-          
-          // Enhanced text με καλύτερη τυπογραφία
-          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          text.setAttribute('x', x);
-          text.setAttribute('y', y);
-          text.setAttribute('text-anchor', 'middle');
-          text.setAttribute('dominant-baseline', 'middle');
-          text.setAttribute('fill', 'white');
-          text.setAttribute('font-size', level === 0 ? '14' : level === 1 ? '11' : '9');
-          text.setAttribute('font-weight', 'bold');
-          text.setAttribute('font-family', 'Roboto, Arial, sans-serif');
-          text.setAttribute('text-shadow', '1px 1px 2px rgba(0,0,0,0.5)');
-          
-          const maxLength = level === 0 ? 25 : level === 1 ? 18 : 14;
-          let displayText = String(node.label || ''); // FIXED: Safe string conversion
-          if (displayText.length > maxLength) {
-            displayText = displayText.substring(0, maxLength - 3) + '...';
-          }
-          text.textContent = displayText;
-          svg.appendChild(text);
-          
-          // Value display για outcomes και metrics - FIXED: Safe value access
-          const nodeValue = safeGet(node, 'data.value');
-          if (nodeValue !== null && nodeValue !== undefined && level > 0) {
-            const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            valueText.setAttribute('x', x);
-            valueText.setAttribute('y', y + 12);
-            valueText.setAttribute('text-anchor', 'middle');
-            valueText.setAttribute('fill', 'rgba(255,255,255,0.9)');
-            valueText.setAttribute('font-size', '8');
-            valueText.setAttribute('font-weight', 'normal');
-            valueText.textContent = typeof nodeValue === 'number' ? 
-              `${nodeValue.toFixed(1)}${safeGet(node, 'data.unit', '')}` : String(nodeValue);
-            svg.appendChild(valueText);
-          }
-          
-          // Enhanced children rendering με καλύτερες γραμμές - FIXED: Safe children access
           const children = safeArray(node.children);
-          if (children.length > 0) {
-            const angleStep = (2 * Math.PI) / children.length;
-            const distance = level === 0 ? 160 : level === 1 ? 120 : 80;
-            
-            children.forEach((child, index) => {
-              if (!child) return; // FIXED: Safe child check
-              
-              const angle = index * angleStep - Math.PI / 2; // Start from top
-              const childX = x + distance * Math.cos(angle);
-              const childY = y + distance * Math.sin(angle);
-              
-              // Enhanced connection line με gradient
-              const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-              line.setAttribute('x1', x + radius * Math.cos(angle));
-              line.setAttribute('y1', y + radius * Math.sin(angle));
-              line.setAttribute('x2', childX - (level === 1 ? 40 : 28) * Math.cos(angle));
-              line.setAttribute('y2', childY - (level === 1 ? 40 : 28) * Math.sin(angle));
-              line.setAttribute('stroke', 'rgba(255,255,255,0.6)');
-              line.setAttribute('stroke-width', level === 0 ? '3' : level === 1 ? '2' : '1');
-              line.setAttribute('stroke-dasharray', level > 0 ? '5,3' : 'none');
-              line.setAttribute('opacity', '0.8');
-              svg.appendChild(line);
-              
-              createEnhancedNode(child, childX, childY, level + 1);
-            });
+          if (children.length > 0 && expandedNodes.has(processed.id)) {
+            processed.children = children.map(child => processNode(child, processed.id)).filter(Boolean);
           }
+          
+          return processed;
         };
         
-        createEnhancedNode(data, width / 2, height / 2);
+        const hierarchyData = processNode(data);
+        if (!hierarchyData) return;
+        
+        // Create D3 hierarchy
+        const root = d3.hierarchy(hierarchyData);
+        
+        // Layout based on view mode
+        let layout;
+        if (viewMode === 'tree') {
+          layout = d3.tree().size([width - 100, height - 100]);
+        } else if (viewMode === 'force') {
+          // Force layout will be handled differently
+          layout = null;
+        } else { // radial
+          layout = d3.tree()
+            .size([2 * Math.PI, Math.min(width, height) / 2 - 80])
+            .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
+        }
+        
+        if (layout) {
+          layout(root);
+        }
+        
+        // Transform coordinates based on view mode
+        const transformCoordinates = (d) => {
+          if (viewMode === 'tree') {
+            return [d.x + 50, d.y + 50];
+          } else if (viewMode === 'radial') {
+            const angle = d.x;
+            const radius = d.y;
+            return [
+              width / 2 + radius * Math.cos(angle - Math.PI / 2),
+              height / 2 + radius * Math.sin(angle - Math.PI / 2)
+            ];
+          }
+          return [d.x || width / 2, d.y || height / 2];
+        };
+        
+        // Color schemes
+        const colorSchemes = {
+          root: { gradient: ['#667eea', '#764ba2'], glow: '#764ba2' },
+          category: { gradient: ['#4facfe', '#00f2fe'], glow: '#00f2fe' },
+          parameter: { gradient: ['#43e97b', '#38f9d7'], glow: '#38f9d7' },
+          outcome: { gradient: ['#fa709a', '#fee140'], glow: '#fee140' },
+          risk: { gradient: ['#ff6b6b', '#ff8787'], glow: '#ff6b6b' },
+          recommendation: { gradient: ['#a8edea', '#fed6e3'], glow: '#fed6e3' }
+        };
+        
+        // Create gradients for each node
+        root.descendants().forEach((d, i) => {
+          const colors = colorSchemes[d.data.type] || colorSchemes.category;
+          const gradient = defs.append('radialGradient')
+            .attr('id', `node-gradient-${i}`)
+            .attr('cx', '30%')
+            .attr('cy', '30%');
+          
+          gradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', colors.gradient[0])
+            .attr('stop-opacity', 0.9);
+          
+          gradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', colors.gradient[1])
+            .attr('stop-opacity', 0.8);
+          
+          d.gradientId = `node-gradient-${i}`;
+          d.glowColor = colors.glow;
+        });
+        
+        // Create links with animations
+        const linkGroup = g.append('g').attr('class', 'links');
+        
+        const links = linkGroup.selectAll('.link')
+          .data(root.links())
+          .enter()
+          .append('g')
+          .attr('class', 'link-group');
+        
+        // Animated link paths
+        links.each(function(d) {
+          const linkEl = d3.select(this);
+          
+          // Create main link
+          const path = linkEl.append('path')
+            .attr('class', 'link')
+            .attr('fill', 'none')
+            .attr('stroke', 'rgba(100, 200, 255, 0.3)')
+            .attr('stroke-width', d.source.depth === 0 ? 3 : 2)
+            .attr('d', () => {
+              const sourceCoords = transformCoordinates(d.source);
+              const targetCoords = transformCoordinates(d.target);
+              
+              if (viewMode === 'radial') {
+                return `M${sourceCoords[0]},${sourceCoords[1]}
+                        Q${(sourceCoords[0] + targetCoords[0]) / 2},${(sourceCoords[1] + targetCoords[1]) / 2}
+                        ${targetCoords[0]},${targetCoords[1]}`;
+              } else {
+                return `M${sourceCoords[0]},${sourceCoords[1]}L${targetCoords[0]},${targetCoords[1]}`;
+              }
+            });
+          
+          // Animated energy flow
+          const energyFlow = linkEl.append('circle')
+            .attr('r', 3)
+            .attr('fill', d.target.glowColor)
+            .attr('filter', 'url(#glow)')
+            .attr('opacity', 0.8);
+          
+          const animateEnergy = () => {
+            energyFlow
+              .attr('opacity', 0.8)
+              .transition()
+              .duration(2000 / animationSpeed)
+              .ease(d3.easeLinear)
+              .attrTween('transform', () => {
+                const path = linkEl.select('.link').node();
+                const length = path.getTotalLength();
+                return (t) => {
+                  const point = path.getPointAtLength(t * length);
+                  return `translate(${point.x},${point.y})`;
+                };
+              })
+              .transition()
+              .duration(200)
+              .attr('opacity', 0)
+              .on('end', animateEnergy);
+          };
+          
+          animateEnergy();
+        });
+        
+        // Create nodes
+        const nodeGroup = g.append('g').attr('class', 'nodes');
+        
+        const nodes = nodeGroup.selectAll('.node')
+          .data(root.descendants())
+          .enter()
+          .append('g')
+          .attr('class', 'node')
+          .attr('transform', d => {
+            const coords = transformCoordinates(d);
+            return `translate(${coords[0]},${coords[1]})`;
+          })
+          .style('cursor', 'pointer');
+        
+        // Node circles with complex animations
+        const circles = nodes.append('circle')
+          .attr('r', d => d.depth === 0 ? 45 : d.depth === 1 ? 35 : 25)
+          .attr('fill', d => `url(#${d.gradientId})`)
+          .attr('stroke', 'rgba(255, 255, 255, 0.8)')
+          .attr('stroke-width', 2)
+          .attr('filter', 'url(#glow)');
+        
+        // Pulse animation for important nodes
+        circles.each(function(d) {
+          if (d.data.type === 'risk' || d.data.type === 'outcome') {
+            const circle = d3.select(this);
+            const originalRadius = +circle.attr('r');
+            
+            const pulse = () => {
+              circle
+                .transition()
+                .duration(1000 / animationSpeed)
+                .attr('r', originalRadius * 1.1)
+                .transition()
+                .duration(1000 / animationSpeed)
+                .attr('r', originalRadius)
+                .on('end', pulse);
+            };
+            pulse();
+          }
+        });
+        
+        // Add rotating rings for root node
+        const rootNode = nodes.filter(d => d.depth === 0);
+        if (!rootNode.empty()) {
+          // Inner ring
+          const innerRing = rootNode.append('circle')
+            .attr('r', 55)
+            .attr('fill', 'none')
+            .attr('stroke', 'rgba(100, 200, 255, 0.5)')
+            .attr('stroke-width', 2)
+            .attr('stroke-dasharray', '5,5');
+          
+          // Outer ring
+          const outerRing = rootNode.append('circle')
+            .attr('r', 65)
+            .attr('fill', 'none')
+            .attr('stroke', 'rgba(150, 100, 255, 0.3)')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '10,5');
+          
+          // Animate rings
+          const animateRings = () => {
+            innerRing
+              .transition()
+              .duration(20000 / animationSpeed)
+              .ease(d3.easeLinear)
+              .attrTween('transform', () => d3.interpolateString('rotate(0)', 'rotate(360)'))
+              .on('end', animateRings);
+            
+            outerRing
+              .transition()
+              .duration(30000 / animationSpeed)
+              .ease(d3.easeLinear)
+              .attrTween('transform', () => d3.interpolateString('rotate(0)', 'rotate(-360)'))
+              .on('end', () => animateRings());
+          };
+          animateRings();
+        }
+        
+        // Node labels with better typography
+        const labels = nodes.append('text')
+          .attr('text-anchor', 'middle')
+          .attr('dominant-baseline', 'middle')
+          .attr('fill', 'white')
+          .attr('font-size', d => d.depth === 0 ? 14 : d.depth === 1 ? 11 : 9)
+          .attr('font-weight', 'bold')
+          .attr('font-family', 'Roboto, Arial, sans-serif')
+          .style('text-shadow', '2px 2px 4px rgba(0,0,0,0.8)')
+          .style('pointer-events', 'none')
+          .text(d => {
+            const maxLength = d.depth === 0 ? 20 : d.depth === 1 ? 15 : 12;
+            const text = d.data.name || '';
+            return text.length > maxLength ? text.substring(0, maxLength - 3) + '...' : text;
+          });
+        
+        // Value labels
+        nodes.filter(d => d.data.value !== null && d.data.value !== undefined && d.depth > 0)
+          .append('text')
+          .attr('y', 12)
+          .attr('text-anchor', 'middle')
+          .attr('fill', 'rgba(255, 255, 255, 0.9)')
+          .attr('font-size', 8)
+          .style('pointer-events', 'none')
+          .text(d => {
+            const value = d.data.value;
+            return typeof value === 'number' ? 
+              `${value.toFixed(1)}${d.data.unit}` : String(value);
+          });
+        
+        // Interactive tooltips
+        const tooltip = d3.select(containerRef.current)
+          .append('div')
+          .attr('class', 'mindmap-tooltip')
+          .style('position', 'absolute')
+          .style('background', 'rgba(0, 0, 0, 0.9)')
+          .style('color', 'white')
+          .style('padding', '12px')
+          .style('border-radius', '8px')
+          .style('font-size', '12px')
+          .style('pointer-events', 'none')
+          .style('opacity', 0)
+          .style('border', '1px solid rgba(100, 200, 255, 0.5)')
+          .style('box-shadow', '0 4px 12px rgba(0, 0, 0, 0.5)');
+        
+        // Node interactions
+        nodes
+          .on('mouseenter', function(event, d) {
+            setHoveredNode(d.data.id);
+            
+            // Enhance node on hover
+            d3.select(this).select('circle')
+              .transition()
+              .duration(200)
+              .attr('r', d => {
+                const baseR = d.depth === 0 ? 45 : d.depth === 1 ? 35 : 25;
+                return baseR * 1.2;
+              })
+              .attr('filter', 'url(#glow) brightness(1.3)');
+            
+            // Show tooltip
+            const nodeData = d.data.originalData;
+            let tooltipContent = `<strong>${d.data.name}</strong><br/>`;
+            tooltipContent += `Type: ${d.data.type}<br/>`;
+            if (d.data.value !== null && d.data.value !== undefined) {
+              tooltipContent += `Value: ${d.data.value}${d.data.unit}<br/>`;
+            }
+            if (nodeData && nodeData.data && nodeData.data.description) {
+              tooltipContent += `<br/>${nodeData.data.description}`;
+            }
+            
+            tooltip
+              .html(tooltipContent)
+              .transition()
+              .duration(200)
+              .style('opacity', 1);
+            
+            // Highlight connected paths
+            links.filter(link => link.source === d || link.target === d)
+              .select('.link')
+              .transition()
+              .duration(200)
+              .attr('stroke', d.glowColor)
+              .attr('stroke-width', 4)
+              .attr('stroke-opacity', 0.8);
+          })
+          .on('mousemove', function(event) {
+            const [x, y] = d3.pointer(event, containerRef.current);
+            tooltip
+              .style('left', (x + 10) + 'px')
+              .style('top', (y - 10) + 'px');
+          })
+          .on('mouseleave', function(event, d) {
+            setHoveredNode(null);
+            
+            // Reset node
+            d3.select(this).select('circle')
+              .transition()
+              .duration(200)
+              .attr('r', d => d.depth === 0 ? 45 : d.depth === 1 ? 35 : 25)
+              .attr('filter', 'url(#glow)');
+            
+            // Hide tooltip
+            tooltip
+              .transition()
+              .duration(200)
+              .style('opacity', 0);
+            
+            // Reset paths
+            links.filter(link => link.source === d || link.target === d)
+              .select('.link')
+              .transition()
+              .duration(200)
+              .attr('stroke', 'rgba(100, 200, 255, 0.3)')
+              .attr('stroke-width', d => d.source.depth === 0 ? 3 : 2)
+              .attr('stroke-opacity', 1);
+          })
+          .on('click', function(event, d) {
+            event.stopPropagation();
+            
+            // Toggle expand/collapse
+            if (d.data.children || (d.data.originalData && safeArray(d.data.originalData.children).length > 0)) {
+              const nodeId = d.data.id;
+              const newExpanded = new Set(expandedNodes);
+              
+              if (newExpanded.has(nodeId)) {
+                newExpanded.delete(nodeId);
+              } else {
+                newExpanded.add(nodeId);
+              }
+              
+              setExpandedNodes(newExpanded);
+            }
+            
+            setSelectedNode(d.data);
+            
+            // Visual feedback
+            const circle = d3.select(this).select('circle');
+            circle
+              .transition()
+              .duration(100)
+              .attr('r', d => {
+                const baseR = d.depth === 0 ? 45 : d.depth === 1 ? 35 : 25;
+                return baseR * 0.9;
+              })
+              .transition()
+              .duration(100)
+              .attr('r', d => {
+                const baseR = d.depth === 0 ? 45 : d.depth === 1 ? 35 : 25;
+                return baseR * 1.1;
+              })
+              .transition()
+              .duration(100)
+              .attr('r', d => d.depth === 0 ? 45 : d.depth === 1 ? 35 : 25);
+          });
+        
+        // Background click to deselect
+        svg.on('click', () => {
+          setSelectedNode(null);
+        });
+        
+        // Add control panel
+        const controls = d3.select(containerRef.current)
+          .append('div')
+          .style('position', 'absolute')
+          .style('top', '10px')
+          .style('right', '10px')
+          .style('background', 'rgba(0, 0, 0, 0.7)')
+          .style('padding', '10px')
+          .style('border-radius', '8px')
+          .style('border', '1px solid rgba(100, 200, 255, 0.3)');
+        
+        // View mode buttons
+        const viewModes = ['radial', 'tree', 'force'];
+        controls.append('div')
+          .style('margin-bottom', '10px')
+          .selectAll('button')
+          .data(viewModes)
+          .enter()
+          .append('button')
+          .text(d => d.charAt(0).toUpperCase() + d.slice(1))
+          .style('margin', '2px')
+          .style('padding', '4px 8px')
+          .style('background', d => d === viewMode ? '#4facfe' : '#333')
+          .style('color', 'white')
+          .style('border', 'none')
+          .style('border-radius', '4px')
+          .style('cursor', 'pointer')
+          .on('click', (event, mode) => {
+            setViewMode(mode);
+          });
+        
+        // Zoom controls
+        const zoomControls = controls.append('div');
+        
+        zoomControls.append('button')
+          .text('Reset Zoom')
+          .style('padding', '4px 8px')
+          .style('background', '#333')
+          .style('color', 'white')
+          .style('border', 'none')
+          .style('border-radius', '4px')
+          .style('cursor', 'pointer')
+          .on('click', () => {
+            svg.transition()
+              .duration(750)
+              .call(zoom.transform, d3.zoomIdentity);
+          });
+        
+        // Export button
+        controls.append('div')
+          .style('margin-top', '10px')
+          .append('button')
+          .text('Export PNG')
+          .style('padding', '4px 8px')
+          .style('background', '#43e97b')
+          .style('color', 'white')
+          .style('border', 'none')
+          .style('border-radius', '4px')
+          .style('cursor', 'pointer')
+          .on('click', () => {
+            // Export functionality would go here
+            notify('Export feature coming soon!', { type: 'info' });
+          });
+        
       } catch (error) {
-        console.error('Error creating mindmap:', error);
+        console.error('Error creating ultra-enhanced mindmap:', error);
       }
-    }, [data]);
+    }, [data, viewMode, animationSpeed, showParticles, expandedNodes]);
     
     return (
-      <svg
-        ref={svgRef}
-        width="100%"
-        height="100%"
-        viewBox="0 0 600 450"
-        style={{ 
-          background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-          borderRadius: '8px'
-        }}
-      />
+      <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
+        <div 
+          ref={containerRef} 
+          style={{ 
+            width: '100%', 
+            height: '100%',
+            position: 'relative',
+            overflow: 'hidden'
+          }} 
+        />
+        
+        {/* Selected Node Info Panel */}
+        {selectedNode && (
+          <Paper
+            sx={{
+              position: 'absolute',
+              bottom: 10,
+              left: 10,
+              p: 2,
+              background: 'rgba(0, 0, 0, 0.8)',
+              color: 'white',
+              maxWidth: 300,
+              borderRadius: 2,
+              border: '1px solid rgba(100, 200, 255, 0.5)'
+            }}
+          >
+            <Typography variant="h6" sx={{ mb: 1 }}>
+              {selectedNode.name}
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 0.5 }}>
+              Type: {selectedNode.type}
+            </Typography>
+            {selectedNode.value !== null && selectedNode.value !== undefined && (
+              <Typography variant="body2">
+                Value: {selectedNode.value}{selectedNode.unit}
+              </Typography>
+            )}
+          </Paper>
+        )}
+        
+        {/* Animation Controls */}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 10,
+            right: 10,
+            display: 'flex',
+            gap: 1,
+            alignItems: 'center'
+          }}
+        >
+          <IconButton
+            size="small"
+            onClick={() => setShowParticles(!showParticles)}
+            sx={{ 
+              background: 'rgba(0, 0, 0, 0.7)', 
+              color: showParticles ? '#4facfe' : 'white',
+              '&:hover': { background: 'rgba(0, 0, 0, 0.8)' }
+            }}
+          >
+            <AutoFixHighIcon />
+          </IconButton>
+          
+          <Slider
+            value={animationSpeed}
+            onChange={(e, v) => setAnimationSpeed(v)}
+            min={0.1}
+            max={3}
+            step={0.1}
+            sx={{ width: 100 }}
+            size="small"
+          />
+          
+          <Typography variant="caption" sx={{ color: 'white' }}>
+            {animationSpeed.toFixed(1)}x
+          </Typography>
+        </Box>
+      </Box>
     );
   };
-
   // FIXED: Enhanced Safety Status Component με safe data access
   const EnhancedSafetyStatusCard = ({ validation = {}, simulation = {} }) => {
     const safetyLevel = safeGet(validation, 'safety_assessment', 'UNKNOWN');
