@@ -1,128 +1,137 @@
-# Diabetes Center: Επαναστατική Ψηφιακή Πλατφόρμα Διαχείρισης Διαβήτη με Τεχνητή Νοημοσύνη & Εξατομικευμένη Ιατρική
+# Diabetes Center Platform
 
-![Diabetes Center Logo](https://img.shields.io/badge/AI-Ready-success)  
-*Ανοικτή, καινοτόμος πλατφόρμα για τον σακχαρώδη διαβήτη – Για κλινικούς, ερευνητές και ασθενείς.*
+## 🚀 Overview
 
----
-
-## 🔬 Vision: Το Μέλλον της Εξατομικευμένης Διαχείρισης Διαβήτη
-
-Ο σακχαρώδης διαβήτης αποτελεί μια από τις μεγαλύτερες προκλήσεις της σύγχρονης ιατρικής, με εκατοντάδες εκατομμύρια ασθενείς παγκοσμίως. Το **Diabetes Center** φιλοδοξεί να μεταμορφώσει τη φροντίδα σε μια ολιστική, προσωποποιημένη, τεκμηριωμένη και data-driven εμπειρία, συνδυάζοντας:
-
-- **Τεχνητή Νοημοσύνη (ΑΙ)**
-- **Γενετική ανάλυση & φαρμακογονιδιωματική**
-- **Real-time επιστημονική τεκμηρίωση**
-- **Εργαλεία αυτοδιαχείρισης για τον ασθενή**
-- **Συμμόρφωση με τα πιο αυστηρά διεθνή standards ασφάλειας & προστασίας δεδομένων**
+**Diabetes Center** is a groundbreaking, AI-powered digital health platform for diabetes management, designed for both clinicians and patients. It combines advanced clinical decision support, digital twin simulation, real-time analytics, and personalized medicine, all within a secure, modular, and extensible architecture.
 
 ---
 
-## 🏗️ Αρχιτεκτονική Συστήματος
-
-### 1. Backend: Flask Modular API
-
-- **Python 3.x / Flask** με Blueprints και πλήρως modular σχεδίαση.
-- **MongoDB** ως NoSQL βάση (document-based, encrypted), κατάλληλη για ετερογενή ιατρικά δεδομένα.
-- **Granular permissions** & role-based access με JWT (stateless, end-to-end encryption).
-
-#### Κύρια modules:
-- **Authentication & Permissions**: Πολυεπίπεδη ασφάλεια, granular δικαιώματα (π.χ. ViewPatientPermission).
-- **Patients, Doctors, Sessions**: CRUD RESTful endpoints, real-time audit trail.
-- **File Management & OCR**: Αυτόματη επεξεργασία και εξαγωγή δομημένων δεδομένων από ιατρικά έγγραφα με ML-based OCR.
-- **AI & Decision Support**: DeepSeek Medical, PubMed RAG, genetics, polygenic scores, PharmGKB integration.
-- **Real-time Communication**: SocketIO, WebRTC για τηλεϊατρική και ειδοποιήσεις.
-
-### 2. Frontend: Δύο Πλήρως Διαχωρισμένες Εφαρμογές
-
-#### α) Doctor/Admin Portal (`diabetes_frontend`)
-- **React + Vite** (SPA)
-- Advanced AI Chat Interface (ιατρική υποστήριξη, PubMed RAG)
-- Πλήρης διαχείριση ασθενών, ραντεβού, εγγράφων, συνεδριών
-- Real-time dashboards, analytics, workflow/calendar management
-- Role-based UI, granular permissions
-- Υποστήριξη dark mode & theme customization
-
-#### β) Patient Progressive Web App (`diabetes_patient_pwa`)
-- **React + Vite PWA** (mobile-first, native-like εμπειρία, offline support)
-- Πλήρης ελληνική τοπικοποίηση (1700+ τρόφιμα, Greek.json)
-- Αυτόματη OCR ανάλυση εργαστηριακών αποτελεσμάτων
-- Διαδραστικά γραφήματα διατροφής, γλυκόζης, trends υγείας
-- Εργαλεία αυτοδιαχείρισης (φαγητό, φάρμακα, δραστηριότητες, αρχεία)
-- Seamless επικοινωνία με γιατρό/κέντρο
-
----
-
-## 🤖 Καινοτομίες & Τεχνολογική Αριστεία
-
-### Τεχνητή Νοημοσύνη & Γενετική Ανάλυση
-- **DeepSeek Medical**: AI-driven recommendations, context-aware decision support
-- **PubMed RAG**: Αυτόματη αναζήτηση και σύνθεση επιστημονικής βιβλιογραφίας με NLP
-- **Genetics Analyzer & Polygenic Scores**: Υπολογισμός γενετικού κινδύνου & εξατομίκευση θεραπείας
-- **PharmGKB Integration**: Φαρμακογονιδιωματική ανάλυση, personalized drug selection & dosage
-
-### Real-time, Data-driven Healthcare
-- **WebRTC / SocketIO**: Peer-to-peer βιντεοκλήσεις, άμεσες ειδοποιήσεις, real-time collaboration
-- **Advanced Dashboards**: Real-time monitoring, predictive analytics, early warning systems
-
-### Διαλειτουργικότητα & Επεκτασιμότητα
-- **API-first approach**: Εύκολη διασύνδεση με τρίτα συστήματα, wearables, health apps
-- **Microservices-ready**: Modular αρχιτεκτονική, έτοιμη για scaling & future-proofing
-
----
-
-## 🔒 Ασφάλεια, Συμμόρφωση & Privacy by Design
-
-- **TLS 1.3, AES-256**: End-to-end κρυπτογράφηση στη μετάδοση & αποθήκευση
-- **JWT με exp, rotation, session monitoring**
-- **Audit logs & anomaly detection**: Πλήρης καταγραφή, ML-based ανάλυση για ύποπτες ενέργειες
-- **GDPR compliance**: Data minimization, right to be forgotten, data portability
-- **Key Management Excellence**: Περιστροφή, hardware secure modules
-
----
-
-## 🧬 Επιστημονική Τεκμηρίωση & Evidence-based Medicine
-
-- **Κάθε απόφαση βασίζεται σε πραγματικό, πρόσφατο evidence** (PubMed RAG, deep learning syntheses)
-- **Κλινική αξία**: Συνδυασμός δεδομένων EHR, γενετικής, διατροφής, lifestyle για πλήρως προσωποποιημένες συστάσεις
-- **Συνεχής ανανέωση γνώσης**: Αλγόριθμοι που ενσωματώνουν νέα ερευνητικά δεδομένα αυτόματα
-
----
-
-## 🚀 Flows & User Journeys
-
-### Για τον Ιατρό
-1. Προφίλ ασθενή: Ιστορικό, γενετική, διατροφή, συνεδρίες, trends
-2. Διαδραστικό ημερολόγιο, διαχείριση ραντεβού, ειδοποιήσεις
-3. AI chat: Πληροφορίες, ιατρικά ερωτήματα, PubMed evidence, personalized recommendations
-4. Advanced analytics: Dashboards, predictive trends, alerts
-5. Διαχείριση εγγράφων με OCR & αυτόματη κατηγοριοποίηση
-
-### Για τον Ασθενή
-1. Mobile PWA: Καταγραφή γευμάτων, φαρμάκων, δραστηριοτήτων
-2. Αυτόματη ανάλυση εργαστηριακών αποτελεσμάτων (OCR)
-3. Real-time feedback, διαδραστικά γραφήματα, nutrition insights
-4. Εύκολη επικοινωνία με ιατρό, διαμοιρασμός αρχείων, ασφάλεια δεδομένων
-5. Προσωποποιημένες συστάσεις & empowerment
-
----
-
-## 📊 Επιστημονική & Κοινωνική Επίδραση
-
-- **Patient empowerment**: Ο ασθενής γίνεται ενεργό μέλος στην υγεία του
-- **Clinical decision support**: Ο γιατρός εξοπλίζεται με AI, genetics, evidence – όχι αντικατάσταση, αλλά ενίσχυση
-- **Research & RWE**: Ανώνυμα δεδομένα για επιστημονική έρευνα, population health, public health policies
-- **Διεύρυνση του οικοσυστήματος**: Εύκολη διασύνδεση με άλλες πλατφόρμες, συστήματα, ακαδημαϊκούς φορείς
-
----
-
-## 🛠️ Τεχνικές Οδηγίες (Setup)
+## 🏗️ Architecture
 
 ### Backend
-```bash
-cd diabetes_backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env  # Συμπληρώστε τα απαραίτητα keys
-python app.py
 
+- **Python 3.x / Flask** modular API with Blueprints for scalability.
+- **MongoDB** (encrypted, document-based) for flexible, secure storage.
+- **Role-Based Access Control (RBAC)** and JWT authentication for secure, granular permissions.
+- **AI & Decision Support**: DeepSeek Medical, PubMed RAG, genetics, polygenic scores, PharmGKB, and digital twin engine.
+- **File Management & OCR**: Automated extraction and structuring of medical data from uploaded documents.
+- **WebRTC & SocketIO**: Real-time video calls, chat, and notifications.
+- **Audit Logging**: Immutable logs and anomaly detection for compliance.
+
+### Frontend
+
+#### Doctor/Admin Portal (`diabetes_frontend`)
+- **React + Vite** SPA.
+- AI chat interface for clinical support and PubMed RAG.
+- Patient management, session history, file management, analytics dashboards.
+- **Interactive Diary**: Shared, editable timeline for doctor-patient communication, medication, and events.
+- **WebRTC Video Calls**: Secure, browser-based video communication with patients.
+- **Interactive Mindmaps**: Visualize patient data, scenarios, and outcomes with D3.js.
+
+#### Patient PWA (`diabetes_patient_pwa`)
+- **React + Vite PWA** (mobile-first, offline support).
+- Full Greek localization (1700+ foods in Greek.json for macronutrient tracking).
+- File upload with OCR, session management, secure messaging, and video calls.
+- **Interactive Diary**: Patients can log symptoms, meals, exercise, and communicate with their doctor in real time.
+
+---
+
+## 🤖 Key Innovations
+
+- **Digital Twin Engine**: Patient-specific, 6-compartment glucose-insulin simulation with stochastic and circadian modeling, supporting “what-if” scenario analysis.
+- **AI Clinical Decision Support**: DeepSeek Medical engine provides context-aware, evidence-based recommendations.
+- **PubMed RAG Integration**: Real-time retrieval and summarization of medical literature for clinical queries.
+- **PGS Catalog & SNP Database**: Polygenic risk scoring, SNP validation, and evidence-based risk stratification.
+- **PharmGKB Pharmacogenomics**: Personalized drug-gene interaction analysis and dosing recommendations.
+- **OCR Engine**: Automated extraction of structured data from PDFs/images (labs, prescriptions, etc.).
+- **Interactive Doctor-Patient Diary**: Shared, editable timeline for tracking symptoms, medications, and lifestyle events.
+- **WebRTC Video Calls**: Secure, encrypted video communication between doctor and patient, with audit trails.
+- **Real-time Dashboards**: Live monitoring, predictive analytics, and early warning systems.
+- **Food Database**: 1700+ Greek foods with macronutrient data for precise dietary tracking.
+- **PWA Patient Portal**: Mobile-friendly, offline-capable, empowering patients to manage their data and communicate with clinicians.
+
+---
+
+## 🔒 Security & Compliance
+
+- **TLS 1.3, AES-256**: End-to-end encryption for data in transit and at rest.
+- **JWT Authentication**: Short-lived tokens, session monitoring, and rotation.
+- **Role-Based Access Control (RBAC)**: Doctors can only access their own patients and sessions.
+- **Audit Logs & Anomaly Detection**: Immutable logging, ML-based analysis for suspicious activity.
+- **GDPR & HIPAA Compliance**: Data minimization, right to be forgotten, data portability.
+- **File Security**: Per-patient access, signed URLs, and encrypted storage.
+- **WebRTC Security**: Encrypted peer-to-peer video streams, no third-party relay.
+- **Vulnerability Management**: Automated dependency scanning and regular security audits.
+
+---
+
+## 🧬 Scientific Foundation
+
+- **PGS Catalog Integration**: Polygenic risk scores for diabetes and comorbidities.
+- **SNP Database**: Curated, validated SNPs with PubMed citations and clinical annotations.
+- **PharmGKB**: Drug-gene interactions for personalized pharmacotherapy.
+- **PubMed RAG**: Real-time literature retrieval and AI-powered summarization.
+- **Digital Twin Simulation**: Advanced PK/PD models for individualized therapy simulation.
+- **Clinical Validation**: Benchmarked against ADA, AACE, and international guidelines.
+
+---
+
+## 🩺 Core Features
+
+- **Doctor Portal**: Add/manage patients, review sessions, upload files, run AI analysis, access PubMed evidence, video calls, and diary.
+- **Patient PWA**: Upload lab/device data, view history, receive AI analysis, communicate securely, video calls, and diary.
+- **File Management**: Drag-and-drop upload, OCR extraction, tagging, preview, and secure download.
+- **AI Analysis**: Visual and textual insights, risk assessment, and actionable recommendations.
+- **Digital Twin Simulation**: Run and visualize “what-if” scenarios for therapy optimization.
+- **Interactive Mindmaps**: Visualize relationships between parameters, outcomes, and recommendations.
+- **Interactive Diary**: Real-time, bidirectional timeline for symptoms, medications, and lifestyle events.
+- **WebRTC Video Calls**: Secure, browser-based video communication with audit trails.
+- **Food & Nutrition**: Greek food database for meal tracking and macronutrient analysis.
+- **Real-time Dashboards**: Live monitoring, predictive analytics, and early warning systems.
+
+---
+
+## 📊 Impact & Clinical Value
+
+- **Personalized Care**: AI-driven, evidence-based recommendations tailored to each patient.
+- **Efficiency**: Automated data extraction, analysis, and reporting reduce clinician workload.
+- **Patient Empowerment**: Patients actively manage their data and participate in care decisions.
+- **Research-Ready**: Modular architecture supports integration with new AI models, devices, and clinical studies.
+
+---
+
+## 🛡️ How to Run
+
+1. **Backend**:  
+   - Python 3.x, Flask, MongoDB  
+   - `pip install -r requirements.txt`  
+   - `python app.py`
+
+2. **Frontend (Doctor Portal & Patient PWA)**:  
+   - Node.js, Vite  
+   - `npm install`  
+   - `npm run dev`
+
+3. **Environment**:  
+   - Configure `.env` with MongoDB URI, PubMed API key, and encryption keys.
+
+---
+
+## 📚 References
+
+- Nathan, D. M., et al. (2008). "The Diabetes Control and Complications Trial/Epidemiology of Diabetes Interventions and Complications Study at 30 years: Overview." *Diabetes Care*.
+- American Diabetes Association. (2020). "Standards of Medical Care in Diabetes—2020." *Diabetes Care*.
+- Riddle, M. C., et al. (2019). "Insulin Therapy in Type 2 Diabetes: A Position Statement of the American Diabetes Association." *Diabetes Care*.
+- PubMed, PGS Catalog, PharmGKB official documentation.
+
+---
+
+## 🏆 Acknowledgements
+
+This platform integrates the latest advances in AI, genomics, and clinical informatics to set a new standard for diabetes care.  
+**For more details, see the [Technical Report](docs/Diabetes_Platform_Technical_Report.md) and [Digital Twin Paper](docs/digital-twin-paper/README.md).**
+
+---
+
+**Contact:**  
+For clinical pilots, research collaboration, or technical support, please contact the project maintainers.
